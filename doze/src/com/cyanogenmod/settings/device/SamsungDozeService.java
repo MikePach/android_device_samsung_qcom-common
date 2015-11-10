@@ -32,6 +32,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 
+import java.lang.System;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.List;
@@ -92,7 +93,7 @@ public class SamsungDozeService extends Service {
             if (mHandwaveGestureEnabled && mPocketGestureEnabled) {
                 return true;
             } else if (mProximityWakeEnabled && (delta < POCKET_DELTA_NS)) {
-                mPowerManager.wakeUp(TimeUnit.NANOSECONDS.toMillis(timestamp));
+                mPowerManager.wakeUp(TimeUnit.NANOSECONDS.toMillis(System.nanoTime()));
                 return false;
             } else if (mHandwaveGestureEnabled && !mPocketGestureEnabled) {
                 return delta < POCKET_DELTA_NS;
